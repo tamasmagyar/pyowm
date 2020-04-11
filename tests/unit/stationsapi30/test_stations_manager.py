@@ -120,6 +120,12 @@ class TestStationManager(unittest.TestCase):
         result = instance.create_station("TEST2", "test2", 37.76, -122.43)
         self.assertIsInstance(result, Station)
 
+        alt_result = instance.create_station("TEST2", "test2", 37.76, -122.43, alt=1.00)
+        self.assertIsInstance(alt_result, Station)
+
+        alt_zero_result = instance.create_station("TEST2", "test2", 37.76, -122.43, alt=0.00)
+        self.assertIsInstance(alt_zero_result, Station)
+
     def test_create_stations_fails_with_wrong_inputs(self):
         instance = self.factory(MockHttpClient)
         with self.assertRaises(AssertionError):
