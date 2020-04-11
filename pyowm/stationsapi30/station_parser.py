@@ -53,7 +53,7 @@ class StationParser(jsonparser.JSONParser):
             lon = d.get('longitude', None)
             lat = d.get('latitude', None)
             alt = d.get('altitude', None)
-        except KeyError as e:
+        except KeyError as e:   # pragma: no cover
             raise parse_response_error.ParseResponseError('Impossible to parse JSON: %s' % e)
         name = d.get('name', None)
         rank = d.get('rank', None)
