@@ -21,8 +21,8 @@ exclude_lines =
     if __name__ == __main__:
     
     # Exclude dump methods
-    def to_JSON(self):
+    def to_JSON
     def to_XML
-    def _to_DOM(self):
+    def _to_DOM
 
 ignore_errors = True
