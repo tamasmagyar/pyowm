@@ -1,3 +1,4 @@
+import copy
 import unittest
 import json
 from pyowm.stationsapi30.parsers.aggregated_measurement_parser import AggregatedMeasurementParser
@@ -15,6 +16,8 @@ class TestAggregatedMeasurementParser(unittest.TestCase):
         "pressure": {},
         "precipitation": {}}
         '''
+
+    test_measurement_json_none_date = copy.deepcopy(test_msmt_json).replace('"date": 123456789,', '')
 
     test_msmt = AggregatedMeasurement('mytest', 123456789, 'm',
                                        temp=dict(min=0, max=100),
@@ -35,6 +38,9 @@ class TestAggregatedMeasurementParser(unittest.TestCase):
         self.assertEqual(self.test_msmt.wind, result.wind)
         self.assertEqual(self.test_msmt.pressure, result.pressure)
         self.assertEqual(self.test_msmt.precipitation, result.precipitation)
+
+        with self.assertRaises(AssertionError):
+            instance.parse_JSON(self.test_measurement_json_none_date)
 
     def test_parse_JSON_fails_with_none_input(self):
         instance = AggregatedMeasurementParser()
